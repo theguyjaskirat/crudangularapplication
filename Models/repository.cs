@@ -8,12 +8,12 @@ namespace CRUD_Angular.Models
 {
     public class repository
     {
-        SqlConnection con = new SqlConnection("Data Source=SUNRISE; Initial Catalog = CRUD; User ID = sa; Password = sunrise");
-
+        SqlConnection con = new SqlConnection("Data Source=jaskirat; Initial Catalog = CRUD; User ID = sa; Password = test");
+        string query;
         public void save(Employee data) 
         {
             con.Open();
-            string query = "InsertEmp)";
+             query = "InsertEmp";
             
             SqlCommand cmd = new SqlCommand(query, con);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -29,8 +29,8 @@ namespace CRUD_Angular.Models
         {
             con.Open();
             var emp = new List<Employee>();
-            string get = "select * from employee";
-            SqlCommand cmd = new SqlCommand(get, con);
+            query = "GetEmp";
+            SqlCommand cmd = new SqlCommand(query, con);
             SqlDataReader dr = cmd.ExecuteReader();
             while (dr.Read()) 
             {                
@@ -48,7 +48,7 @@ namespace CRUD_Angular.Models
         public void delete(int data)
         {
             con.Open();
-            string query = "delete from employee where id=@id";
+            query = "DeleteEmp";
             SqlCommand cmd = new SqlCommand(query, con);
             cmd.Parameters.AddWithValue("@id", data);
             cmd.ExecuteNonQuery();
@@ -58,8 +58,8 @@ namespace CRUD_Angular.Models
         public void update(Employee emp) 
         {
             con.Open();
-            string save = "update employee set name=@nm, designation=@dg, mobile=@mb where id=@id";
-            SqlCommand cmd = new SqlCommand(save, con);
+            query = "updateEmp";
+            SqlCommand cmd = new SqlCommand(query, con);
             cmd.Parameters.AddWithValue("@id", emp.id);
             cmd.Parameters.AddWithValue("@nm", emp.name);
             cmd.Parameters.AddWithValue("@dg", emp.designation);
