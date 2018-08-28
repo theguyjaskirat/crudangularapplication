@@ -31,6 +31,7 @@ namespace CRUD_Angular.Models
             var emp = new List<Employee>();
             query = "GetEmp";
             SqlCommand cmd = new SqlCommand(query, con);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
             SqlDataReader dr = cmd.ExecuteReader();
             while (dr.Read()) 
             {                
@@ -50,6 +51,7 @@ namespace CRUD_Angular.Models
             con.Open();
             query = "DeleteEmp";
             SqlCommand cmd = new SqlCommand(query, con);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@id", data);
             cmd.ExecuteNonQuery();
             con.Close();
@@ -60,6 +62,7 @@ namespace CRUD_Angular.Models
             con.Open();
             query = "updateEmp";
             SqlCommand cmd = new SqlCommand(query, con);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@id", emp.id);
             cmd.Parameters.AddWithValue("@nm", emp.name);
             cmd.Parameters.AddWithValue("@dg", emp.designation);
